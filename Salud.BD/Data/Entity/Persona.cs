@@ -31,5 +31,9 @@ namespace Salud.BD.Data.Entity
         [MaxLength(50, ErrorMessage = "En el {0} usar como máximo {1} caracteres")]
         [Display(Name = "Apellido")]
         public string Apellido { get; set; }
+
+        public List<Titulo> Titulos { get; set; }
+
+        public List<Matricula> Matriculas { get; set; }
     }
 }
