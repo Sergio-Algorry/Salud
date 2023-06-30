@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.OpenApi.Models;
 using Salud.BD.Data;
 
 // Add services to the container.
@@ -11,7 +12,8 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<Context>(op => op.UseSqlServer("name=conn"));
 
-
+builder.Services.AddSwaggerGen(c =>
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Salud", Version = "v1" }));
 
 // Configure the HTTP request pipeline.
 var app = builder.Build();
@@ -19,6 +21,8 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseWebAssemblyDebugging();
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Titulos v1"));
 }
 else
 {
